@@ -135,7 +135,7 @@ public class Graph<V>
      */
     public boolean contains(V vertex)
     {
-        return false;
+        return adjVerts.containsKey(vertex);
     }
 
     /**
