@@ -200,4 +200,19 @@ public class Graph<V>
         }
         return strBuilder.toString().trim();
     }
+
+    /**
+    * equal method for Graph
+    *
+    * @param obj the arbitrary object
+    * @return true if this is equal to obj
+    */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Graph graph = (Graph) obj;
+        return this.toString().equals(graph.toString());
+    }
+
 }
