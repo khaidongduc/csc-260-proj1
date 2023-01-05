@@ -18,11 +18,15 @@ package edu.union.adt.graph;
  */
 public class Graph<V>
 {
+
+    private Map<V, Set<V>> adjVerts;
+
     /**
      * Create an empty graph.
      */
     public Graph() 
     {
+        this.adjVerts = new Map<>();
     }
 
     /**
