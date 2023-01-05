@@ -1,5 +1,9 @@
 package edu.union.adt.graph;
 
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Set;
+
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -17,7 +21,7 @@ package edu.union.adt.graph;
  * @version 1
  */
 public class Graph<V>
-{
+{   
 
     private Map<V, Set<V>> adjVerts;
 
@@ -26,7 +30,7 @@ public class Graph<V>
      */
     public Graph() 
     {
-        this.adjVerts = new Map<>();
+        this.adjVerts = new HashMap<>();
     }
 
     /**
