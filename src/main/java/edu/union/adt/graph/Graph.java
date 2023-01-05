@@ -19,8 +19,8 @@ import java.util.Iterator;
  * parameterized with a vertex type V instead of assuming String
  * vertices.
  *
- * @author Aaron G. Cass
- * @version 1
+ * @author Aaron G. Cass, Khai Dong
+ * @version 1.1
  */
 public class Graph<V>
 {   
