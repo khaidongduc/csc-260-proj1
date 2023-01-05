@@ -151,7 +151,9 @@ public class Graph<V>
      */
     public boolean hasEdge(V from, V to)
     {
-        return false;
+        return this.contains(from) // check if from is in the graph
+            && this.contains(to) // check if to is in the graph
+            && this.adjVerts.get(from).contains(to); // check if the edge exists
     }
 
     /**
