@@ -190,16 +190,20 @@ public class Graph<V>
     public String toString()
     {
         StringBuilder strBuilder = new StringBuilder();
-        for(V vertex : this.getVertices()){
+        Iterator<V> vertIter = this.getVertices().iterator(); 
+        while(vertIter.hasNext()){
+            V vertex = vertIter.next();
             strBuilder.append(vertex).append(":");
             Iterator<V> adjVertIter = this.adjacentTo(vertex).iterator(); 
             while(adjVertIter.hasNext()){
                 strBuilder.append(adjVertIter.next());
-                if(adjVertIter.hasNext()) strBuilder.append(',');
+                if(adjVertIter.hasNext()) 
+                    strBuilder.append(',');
             }
-            strBuilder.append("\n");
+            if(vertIter.hasNext()) 
+                strBuilder.append("\n");
         }
-        return strBuilder.toString().trim();
+        return strBuilder.toString();
     }
 
     /**
