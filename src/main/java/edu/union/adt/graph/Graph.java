@@ -65,7 +65,7 @@ public class Graph<V>
      */
     public int degree(V vertex)
     {
-        if(!adjVerts.containsKey(vertex)){
+        if(!this.contains(vertex)){
             throw new RuntimeException("vertex is not in the graph");
         }
         return adjVerts.get(vertex).size();
