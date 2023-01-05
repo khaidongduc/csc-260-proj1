@@ -188,6 +188,16 @@ public class Graph<V>
      */
     public String toString()
     {
-        return "";
+        StringBuilder strBuilder = new StringBuilder();
+        for(V vertex : this.getVertices()){
+            strBuilder.append(vertex).append(":");
+            Iterator<V> adjVertIter = this.adjacentTo(vertex).iterator(); 
+            while(adjVertIter.hasNext()){
+                strBuilder.append(adjVertIter.next());
+                if(adjVertIter.hasNext()) strBuilder.append(',');
+            }
+            strBuilder.append("\n");
+        }
+        return strBuilder.toString().trim();
     }
 }
