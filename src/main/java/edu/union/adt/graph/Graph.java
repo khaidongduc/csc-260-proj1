@@ -106,7 +106,7 @@ public class Graph<V>
      */
     public Iterable<V> getVertices()
     {
-        return null;
+        return adjVerts.keySet();
     }
 
     /**
