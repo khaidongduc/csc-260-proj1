@@ -3,6 +3,7 @@ package edu.union.adt.graph;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
+import java.util.HashSet;
 
 /**
  * A graph that establishes connections (edges) between objects of
@@ -80,6 +81,9 @@ public class Graph<V>
      */
     public void addEdge(V from, V to)
     {
+        this.addVertex(from);
+        this.addVertex(to);
+        adjVerts.get(from).add(to);
     }
 
     /**
@@ -91,6 +95,9 @@ public class Graph<V>
      */
     public void addVertex(V vertex)
     {
+        if(!adjVerts.containsKey(vertex)){
+            adjVerts.put(vertex, new HashSet<V>());
+        }
     }
 
     /**
