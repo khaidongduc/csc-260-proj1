@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
+import java.util.Iterator;
 
 /**
  * A graph that establishes connections (edges) between objects of
