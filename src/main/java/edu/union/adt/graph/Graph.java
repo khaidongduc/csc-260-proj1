@@ -38,7 +38,7 @@ public class Graph<V>
      */
     public int numVertices()
     {
-        return 0;
+        return adjVerts.size();
     }
 
     /**
@@ -46,7 +46,11 @@ public class Graph<V>
      */
     public int numEdges()
     {
-        return 0;
+        int numEdges = 0;
+        for(Map.Entry<V, Set<V>> entry : adjVerts.entrySet()){
+            numEdges += entry.getValue().size();
+        }
+        return numEdges;
     }
 
     /**
