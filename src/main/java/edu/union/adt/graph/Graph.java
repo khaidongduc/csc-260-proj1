@@ -124,7 +124,7 @@ public class Graph<V>
      */
     public Iterable<V> adjacentTo(V from)
     {
-        return null;
+        return adjVerts.get(from);
     }
 
     /**
