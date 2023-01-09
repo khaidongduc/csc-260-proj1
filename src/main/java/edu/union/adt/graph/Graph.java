@@ -1,11 +1,5 @@
 package edu.union.adt.graph;
 
-import java.util.Map;
-import java.util.HashMap;
-import java.util.Set;
-import java.util.HashSet;
-import java.util.Iterator;
-
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -20,40 +14,20 @@ import java.util.Iterator;
  * vertices.
  *
  * @author Aaron G. Cass, Khai Dong
- * @version 1.1
+ * @version 1
  */
-public class Graph<V>
-{   
-
-    private Map<V, Set<V>> adjVerts;
-
-    /**
-     * Create an empty graph.
-     */
-    public Graph() 
-    {
-        this.adjVerts = new HashMap<>();
-    }
+public interface Graph<V>
+{
 
     /**
      * @return the number of vertices in the graph.
      */
-    public int numVertices()
-    {
-        return adjVerts.size();
-    }
+    public int numVertices();
 
     /**
      * @return the number of edges in the graph.
      */
-    public int numEdges()
-    {
-        int numEdges = 0;
-        for(Map.Entry<V, Set<V>> entry : adjVerts.entrySet()){
-            numEdges += entry.getValue().size();
-        }
-        return numEdges;
-    }
+    public int numEdges();
 
     /**
      * Gets the number of vertices connected by edges from a given
@@ -63,13 +37,7 @@ public class Graph<V>
      * @param vertex the vertex whose degree we want.
      * @return the degree of vertex 'vertex'
      */
-    public int degree(V vertex)
-    {
-        if(!this.contains(vertex)){
-            throw new RuntimeException("vertex is not in the graph");
-        }
-        return adjVerts.get(vertex).size();
-    }
+    public int degree(V vertex);
 
     /**
      * Adds a directed edge between two vertices.  If there is already an edge
@@ -80,12 +48,7 @@ public class Graph<V>
      * @param from the source vertex for the added edge
      * @param to the destination vertex for the added edge
      */
-    public void addEdge(V from, V to)
-    {
-        this.addVertex(from);
-        this.addVertex(to);
-        adjVerts.get(from).add(to);
-    }
+    public void addEdge(V from, V to);
 
     /**
      * Adds a vertex to the graph.  If the vertex already exists in
@@ -94,21 +57,13 @@ public class Graph<V>
      *
      * @param vertex the vertex to add
      */
-    public void addVertex(V vertex)
-    {
-        if(!adjVerts.containsKey(vertex)){
-            adjVerts.put(vertex, new HashSet<V>());
-        }
-    }
+    public void addVertex(V vertex);
 
     /**
      * @return the an iterable collection for the set of vertices of
      * the graph.
      */
-    public Iterable<V> getVertices()
-    {
-        return adjVerts.keySet();
-    }
+    public Iterable<V> getVertices();
 
     /**
      * Gets the vertices adjacent to a given vertex.  A vertex y is
@@ -123,10 +78,7 @@ public class Graph<V>
      * vertex.  If 'from' is not a vertex in the graph, returns an
      * empty iterator.
      */
-    public Iterable<V> adjacentTo(V from)
-    {
-        return adjVerts.get(from);
-    }
+    public Iterable<V> adjacentTo(V from);
 
     /**
      * Tells whether or not a vertex is in the graph.
@@ -134,10 +86,7 @@ public class Graph<V>
      * @param vertex a vertex
      * @return true iff 'vertex' is a vertex in the graph.
      */
-    public boolean contains(V vertex)
-    {
-        return adjVerts.containsKey(vertex);
-    }
+    public boolean contains(V vertex);
 
     /**
      * Tells whether an edge exists in the graph.
@@ -150,12 +99,7 @@ public class Graph<V>
      * vertices are not vertices in the graph, then there is no edge
      * between them.
      */
-    public boolean hasEdge(V from, V to)
-    {
-        return this.contains(from) // check if from is in the graph
-            && this.contains(to) // check if to is in the graph
-            && this.adjVerts.get(from).contains(to); // check if the edge exists
-    }
+    public boolean hasEdge(V from, V to);
 
     /**
      * Gives a string representation of the graph.  The representation
@@ -187,37 +131,5 @@ public class Graph<V>
      *
      * @return the string representation of the graph
      */
-    public String toString()
-    {
-        StringBuilder strBuilder = new StringBuilder();
-        Iterator<V> vertIter = this.getVertices().iterator(); 
-        while(vertIter.hasNext()){
-            V vertex = vertIter.next();
-            strBuilder.append(vertex).append(":");
-            Iterator<V> adjVertIter = this.adjacentTo(vertex).iterator(); 
-            while(adjVertIter.hasNext()){
-                strBuilder.append(adjVertIter.next());
-                if(adjVertIter.hasNext()) 
-                    strBuilder.append(',');
-            }
-            if(vertIter.hasNext()) 
-                strBuilder.append("\n");
-        }
-        return strBuilder.toString();
-    }
-
-    /**
-    * equal method for Graph
-    *
-    * @param obj the arbitrary object
-    * @return true if this is equal to obj
-    */
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (obj == null || getClass() != obj.getClass()) return false;
-        Graph graph = (Graph) obj;
-        return this.toString().equals(graph.toString());
-    }
-
+    public String toString();
 }
