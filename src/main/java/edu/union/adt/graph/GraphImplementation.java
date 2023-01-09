@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import edu.union.adt.graph.Graph;
 
 /**
  * A graph that establishes connections (edges) between objects of
@@ -22,7 +23,7 @@ import java.util.Iterator;
  * @author Aaron G. Cass, Khai Dong
  * @version 1.1
  */
-public class GraphImplementation<V>
+public class GraphImplementation<V> implements Graph<V>
 {   
 
     private Map<V, Set<V>> adjVerts;
