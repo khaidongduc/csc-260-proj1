@@ -16,14 +16,34 @@ import edu.union.adt.graph.GraphFactory;
 
 @RunWith(JUnit4.class)
 public class GraphIsEmptyTests {
+    
+    private Graph<String> g;
+    
     @Before
     public void setUp()
     { 
-
+        g = GraphFactory.<String>createGraph();
     }
 
     @Test
-    public void dummyTest(){
+    public void simpleIsEmpty()
+    {
+        // the graph should be empty after initialization
+        assertTrue(g.isEmpty());
+
+        // after adding a vertex, the graph should not be empty anymore
+        g.addVertex("01");
+        g.addVertex("02");
+        g.addEdge("01", "02");
+        assertFalse(g.isEmpty());
         
+        // after remove a non existant vertex, the graph should still not empty
+        g.removeVertex("03");
+        assertFalse(g.isEmpty());
+        
+        // remove all verteces, the graph should be empty
+        g.removeVertex("01");
+        g.removeVertex("02");
+        assertTrue(g.isEmpty());
     }
 }
