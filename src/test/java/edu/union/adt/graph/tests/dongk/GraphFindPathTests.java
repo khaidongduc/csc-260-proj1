@@ -16,10 +16,13 @@ import edu.union.adt.graph.GraphFactory;
 
 @RunWith(JUnit4.class)
 public class GraphFindPathTests {
+        
+    private Graph<String> g;
+
     @Before
     public void setUp()
-    { 
-
+    {
+        g = GraphFactory.<String>createGraph(); 
     }
 
     @Test
