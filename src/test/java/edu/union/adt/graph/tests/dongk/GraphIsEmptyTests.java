@@ -28,27 +28,26 @@ public class GraphIsEmptyTests {
     @Test
     public void simpleIsEmpty()
     {
-        // the graph should be empty after initialization
         {
-            assertTrue(g.isEmpty());
+            assertTrue("the graph should be empty after initialization", g.isEmpty());
         }
-        // after adding a vertex, the graph should not be empty anymore
+        
         {
             g.addVertex(new String("01"));
             g.addVertex(new String("02"));
             g.addEdge(new String("01"), new String("02"));
-            assertFalse(g.isEmpty());
+            assertFalse("after adding a vertex, the graph should not be empty anymore", g.isEmpty());
         }
-        // after remove a non existant vertex, the graph should still not empty
+        
         {
             g.removeVertex(new String("03"));
-            assertFalse(g.isEmpty());
+            assertFalse("after remove a non existant vertex, the graph should still not empty", g.isEmpty());
         }
-        // remove all verteces, the graph should be empty
+        
         {
             g.removeVertex(new String("01"));
             g.removeVertex(new String("02"));
-            assertTrue(g.isEmpty());
+            assertTrue("remove all vertices, the graph should be empty", g.isEmpty());
         }
     }
 }
