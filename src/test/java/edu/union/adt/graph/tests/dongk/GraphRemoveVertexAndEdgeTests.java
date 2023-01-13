@@ -78,4 +78,112 @@ public class GraphRemoveVertexAndEdgeTests {
         assertEquals("Number of vertices reduces by 5", g.numEdges(), 2);
     }
 
+    @Test
+    public void simpleRemoveEdgeAndVertex(){
+        {
+            // remove edge that do not exist
+            g.removeEdge(new String("1"), new String("6"));
+
+            assertTrue("Graph should still contains vertex 1", g.contains(new String("1")));
+            assertTrue("Graph should still contains vertex 2", g.contains(new String("2")));
+            assertTrue("Graph should still contains vertex 3", g.contains(new String("3")));
+            assertTrue("Graph should still contains vertex 4", g.contains(new String("4")));
+            assertTrue("Graph should still contains vertex 5", g.contains(new String("5")));
+            assertTrue("Graph should still contains vertex 6", g.contains(new String("6")));
+
+            assertTrue("Graph should still contains edge 1 2", g.hasEdge(new String("1"), new String("2")));
+            assertTrue("Graph should still contains edge 1 3", g.hasEdge(new String("1"), new String("3")));
+            assertTrue("Graph should still contains edge 3 2", g.hasEdge(new String("3"), new String("2")));
+            assertTrue("Graph should still contains edge 1 4", g.hasEdge(new String("1"), new String("4")));
+            assertTrue("Graph should still contains edge 4 1", g.hasEdge(new String("4"), new String("1")));
+            assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
+            assertTrue("Graph should still contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
+
+            assertFalse("Graph never contains edge 1 6", g.hasEdge(new String("1"), new String("6")));
+
+            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
+            assertEquals("Number of edges stay the same", g.numEdges(), 7);
+            assertFalse("Graph should not be empty", g.isEmpty());
+        }
+
+        {
+            // remove vertex that do not exist
+            g.removeVertex(new String("7"));
+
+            assertTrue("Graph should still contains vertex 1", g.contains(new String("1")));
+            assertTrue("Graph should still contains vertex 2", g.contains(new String("2")));
+            assertTrue("Graph should still contains vertex 3", g.contains(new String("3")));
+            assertTrue("Graph should still contains vertex 4", g.contains(new String("4")));
+            assertTrue("Graph should still contains vertex 5", g.contains(new String("5")));
+            assertTrue("Graph should still contains vertex 6", g.contains(new String("6")));
+            
+            assertFalse("Graph never contains vertex 7", g.contains(new String("7")));
+
+            assertTrue("Graph should still contains edge 1 2", g.hasEdge(new String("1"), new String("2")));
+            assertTrue("Graph should still contains edge 1 3", g.hasEdge(new String("1"), new String("3")));
+            assertTrue("Graph should still contains edge 3 2", g.hasEdge(new String("3"), new String("2")));
+            assertTrue("Graph should still contains edge 1 4", g.hasEdge(new String("1"), new String("4")));
+            assertTrue("Graph should still contains edge 4 1", g.hasEdge(new String("4"), new String("1")));
+            assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
+            assertTrue("Graph should still contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
+
+            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
+            assertEquals("Number of edges stay the same", g.numEdges(), 7);
+            assertFalse("Graph should not be empty", g.isEmpty());
+        }
+
+        {
+            g.removeEdge(new String("1"), new String("2"));
+
+            assertTrue("Graph should still contains vertex 1", g.contains(new String("1")));
+            assertTrue("Graph should still contains vertex 2", g.contains(new String("2")));
+            assertTrue("Graph should still contains vertex 3", g.contains(new String("3")));
+            assertTrue("Graph should still contains vertex 4", g.contains(new String("4")));
+            assertTrue("Graph should still contains vertex 5", g.contains(new String("5")));
+            assertTrue("Graph should still contains vertex 6", g.contains(new String("6")));
+
+            assertFalse("Graph no longer contain edge 1 2", g.hasEdge(new String("1"), new String("2")));
+            assertTrue("Graph should still contains edge 1 3", g.hasEdge(new String("1"), new String("3")));
+            assertTrue("Graph should still contains edge 3 2", g.hasEdge(new String("3"), new String("2")));
+            assertTrue("Graph should still contains edge 1 4", g.hasEdge(new String("1"), new String("4")));
+            assertTrue("Graph should still contains edge 4 1", g.hasEdge(new String("4"), new String("1")));
+            assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
+            assertTrue("Graph should still contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
+
+            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
+            assertEquals("Number of edges reduces by 1", g.numEdges(), 6);
+            assertFalse("Graph should not be empty", g.isEmpty());
+        }
+
+        {
+            g.removeVertex(new String("1"));
+            g.removeVertex(new String("2"));
+            g.removeVertex(new String("3"));
+            g.removeVertex(new String("4"));
+            g.removeVertex(new String("5"));
+            g.removeVertex(new String("6"));
+
+            assertFalse("Graph no longer contains vertex 1", g.contains(new String("1")));
+            assertFalse("Graph no longer contains vertex 2", g.contains(new String("2")));
+            assertFalse("Graph no longer contains vertex 3", g.contains(new String("3")));
+            assertFalse("Graph no longer contains vertex 4", g.contains(new String("4")));
+            assertFalse("Graph no longer contains vertex 5", g.contains(new String("5")));
+            assertFalse("Graph no longer contains vertex 6", g.contains(new String("6")));
+
+            assertFalse("Graph no longer contain edge 1 2", g.hasEdge(new String("1"), new String("2")));
+            assertFalse("Graph no longer contains edge 1 3", g.hasEdge(new String("1"), new String("3")));
+            assertFalse("Graph no longer contains edge 3 2", g.hasEdge(new String("3"), new String("2")));
+            assertFalse("Graph no longer contains edge 1 4", g.hasEdge(new String("1"), new String("4")));
+            assertFalse("Graph no longer contains edge 4 1", g.hasEdge(new String("4"), new String("1")));
+            assertFalse("Graph no longer contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
+            assertFalse("Graph no longer contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
+
+            assertEquals("Number of vertex is 0", g.numVertices(), 0);
+            assertEquals("Number of edges is 0", g.numEdges(), 0);
+            assertTrue("Graph should be empty", g.isEmpty());
+        }
+
+    }
+
+
 }
