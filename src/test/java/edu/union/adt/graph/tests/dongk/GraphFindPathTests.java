@@ -28,7 +28,7 @@ public class GraphFindPathTests {
     }
 
     @Test
-    public void simpleFindPath(){
+    public void simpleGraph(){
         g.addEdge(new String("1"), new String("2"));
         g.addEdge(new String("2"), new String("3"));
         
