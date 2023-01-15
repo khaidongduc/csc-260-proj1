@@ -124,7 +124,7 @@ public class GraphFindPathTests {
         }
 
         {
-            String msg = "There is a path of length 3 from vertex 1 to vertex 1";
+            String msg = "There is a path of length 3 from vertex 1 to vertex 4";
             assertTrue(msg, g.hasPath(new String("1"), new String("4")));
             assertEquals(msg, g.pathLength(new String("1"), new String("4")), 3);
             checkPath(g,
