@@ -43,11 +43,19 @@ public class GraphIsEmptyTests {
             g.removeVertex(new String("03"));
             assertFalse("after remove a non existant vertex, the graph should still not empty", g.isEmpty());
         }
-        
-        {
-            g.removeVertex(new String("01"));
-            g.removeVertex(new String("02"));
-            assertTrue("remove all vertices, the graph should be empty", g.isEmpty());
-        }
     }
+
+    @Test
+    public void removeAllVertices()
+    {
+        g.addVertex(new String("01"));
+        g.addVertex(new String("02"));
+        g.addEdge(new String("01"), new String("02"));
+        assertFalse("after adding a vertex, the graph should not be empty anymore", g.isEmpty());
+        
+        g.removeVertex(new String("01"));
+        g.removeVertex(new String("02"));
+        assertTrue("remove all vertices, the graph should be empty", g.isEmpty());
+    }
+
 }
