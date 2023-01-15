@@ -232,6 +232,77 @@ public class GraphFindPathTests {
 
     }
 
+    @Test
+    public void dynamicGraph(){
+        g.addVertex(new String("1"));
+        g.addEdge(new String("2"), new String("3"));
+
+        {
+            String msg = "Initially, there is no path from vertex 1 to vertex 3";
+            assertFalse(msg, g.hasPath(new String("1"), new String("3")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("3")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("1"), new String("3"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("1"), new String("3")));
+        }
+
+        {
+            String msg = "No path from vertex 3 to vertex 1";
+            assertFalse(msg, g.hasPath(new String("3"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("3"), new String("1")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("3"), new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("3"), new String("1")));
+        }
+
+        g.addEdge(new String("1"), new String("2"));
+        
+        {
+            String msg = "After adding edge 1 2, there is a path of length 2 from vertex 1 to vertex 3";
+            assertTrue(msg, g.hasPath(new String("1"), new String("3")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("3")), 2);
+            checkPath(g,
+                    new String("1"), new String("3"), 
+                    2,
+                    g.getPath(new String("1"), new String("3")));
+        }
+
+        {
+            String msg = "No path from vertex 3 to vertex 1";
+            assertFalse(msg, g.hasPath(new String("3"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("3"), new String("1")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("3"), new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("3"), new String("1")));
+        }
+
+        g.removeEdge(new String("2"), new String("3"));
+        
+        {
+            String msg = "After removing edge 2 3, there is no path from vertex 1 to vertex 3";
+            assertFalse(msg, g.hasPath(new String("1"), new String("3")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("3")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("1"), new String("3"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("1"), new String("3")));
+        }
+
+        {
+            String msg = "No path from vertex 3 to vertex 1";
+            assertFalse(msg, g.hasPath(new String("3"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("3"), new String("1")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("3"), new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("3"), new String("1")));
+        }
+
+    }
+
     /**
      * helper function to verify a path in a graph
      * can pass pathLength = Integer.MAX_VALUE into the function to signify that there does not exist such path
