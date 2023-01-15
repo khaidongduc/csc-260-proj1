@@ -303,6 +303,56 @@ public class GraphFindPathTests {
 
     }
 
+    @Test
+    public void dynamicGraph2(){
+        g.addEdge(new String("1"), new String("2"));
+        g.addEdge(new String("2"), new String("3"));
+        g.addEdge(new String("3"), new String("4"));
+        g.addEdge(new String("4"), new String("5"));
+        g.addEdge(new String("5"), new String("6"));
+        g.addEdge(new String("1"), new String("7"));
+        g.addEdge(new String("7"), new String("8"));
+        g.addEdge(new String("8"), new String("6"));
+        
+
+        {
+            String msg = "Initially, there is a path of size 3 from vertex 1 to vertex 6";
+            assertTrue(msg, g.hasPath(new String("1"), new String("6")));
+            assertEquals(msg, 3, g.pathLength(new String("1"), new String("6")));
+            checkPath(g,
+                    new String("1"), new String("6"), 
+                    3,
+                    g.getPath(new String("1"), new String("6")));
+        }
+
+        g.removeVertex(new String("8"));
+
+        {
+            String msg = "After removing vertex 8, there is a path of size 5 from vertex 1 to vertex 6";
+            assertTrue(msg, g.hasPath(new String("1"), new String("6")));
+            assertEquals(msg, 5, g.pathLength(new String("1"), new String("6")));
+            checkPath(g,
+                    new String("1"), new String("6"), 
+                    5,
+                    g.getPath(new String("1"), new String("6")));
+        }
+
+        g.addEdge(new String("7"), new String("9"));
+        g.addEdge(new String("9"), new String("6"));
+    
+        {
+            String msg = "there is a path of size 3 from vertex 1 to vertex 6";
+            assertTrue(msg, g.hasPath(new String("1"), new String("6")));
+            assertEquals(msg, 3, g.pathLength(new String("1"), new String("6")));
+            checkPath(g,
+                    new String("1"), new String("6"), 
+                    3,
+                    g.getPath(new String("1"), new String("6")));
+        }
+
+    }
+
+
     /**
      * helper function to verify a path in a graph
      * can pass pathLength = Integer.MAX_VALUE into the function to signify that there does not exist such path
