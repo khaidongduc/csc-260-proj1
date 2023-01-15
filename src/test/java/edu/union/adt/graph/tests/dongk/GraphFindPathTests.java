@@ -106,6 +106,33 @@ public class GraphFindPathTests {
 
     }
 
+    @Test
+    public void simpleLoop(){
+        g.addEdge(new String("1"), new String("2"));
+        g.addEdge(new String("2"), new String("3"));
+        g.addEdge(new String("3"), new String("4"));
+        g.addEdge(new String("4"), new String("1"));
+
+        {
+            String msg = "There is a path of length 0 from vertex 1 to vertex 1";
+            assertTrue(msg, g.hasPath(new String("1"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("1")), 0);
+            checkPath(g,
+                    new String("1"), new String("1"), 
+                    0,
+                    g.getPath(new String("1"), new String("1")));
+        }
+
+        {
+            String msg = "There is a path of length 3 from vertex 1 to vertex 1";
+            assertTrue(msg, g.hasPath(new String("1"), new String("4")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("4")), 3);
+            checkPath(g,
+                    new String("1"), new String("4"), 
+                    3,
+                    g.getPath(new String("1"), new String("4")));
+        }
+    }
 
     /**
      * helper function to verify a path in a graph
