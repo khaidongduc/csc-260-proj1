@@ -322,9 +322,9 @@ public class GraphFindPathTests {
      * @param path the Iterable<V> object containing the vertices of the graph starting from vertex from 
      * and ending at vertex to
      */
-    private <V> void checkPath(Graph<V> g, V from, V to, int pathLength, Iterable<V> path){
+    private <V> void checkPath(Graph<V> g, V from, V to, int expectedPathLength, Iterable<V> path){
         Iterator<V> pathIterator = path.iterator();
-        if(pathLength == Integer.MAX_VALUE){
+        if(expectedPathLength == Integer.MAX_VALUE){
             assertFalse("path should be empty", pathIterator.hasNext());
         } else {
             V curVert = pathIterator.next();
@@ -336,7 +336,7 @@ public class GraphFindPathTests {
                 curVert = nextVert;
                 ++length;
             }
-            assertEquals("path leng is not consistent", pathLength, length);
+            assertEquals("path leng is not consistent", expectedPathLength, length);
             assertEquals("final vertex is not to", to, curVert);
         }
     }
