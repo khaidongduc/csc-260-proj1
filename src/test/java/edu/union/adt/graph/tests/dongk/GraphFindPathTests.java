@@ -28,8 +28,82 @@ public class GraphFindPathTests {
     }
 
     @Test
-    public void dummyTest(){
+    public void simpleFindPath(){
+        g.addEdge(new String("1"), new String("2"));
+        g.addEdge(new String("2"), new String("3"));
         
+
+        {
+            String msg = "There is a path of length 2 from vertex 1 to vertex 3";
+            assertTrue(msg, g.hasPath(new String("1"), new String("3")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("3")), 2);
+            checkPath(g,
+                    new String("1"), new String("3"), 
+                    2,
+                    g.getPath(new String("1"), new String("3")));
+        }
+        
+        {
+            String msg = "There is no path from vertex 3 to vertex 1";
+            assertFalse(msg, g.hasPath(new String("3"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("3"), new String("1")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("3"), new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("3"), new String("1")));
+        }
+
+        {
+            // find path from a vertex that does exist in the graph to itself
+            // should exist a path of length 0
+            String msg = "There is a path of length 0 from vertex 2 to vertex 2";
+            assertTrue(msg, g.hasPath(new String("2"), new String("2")));
+            assertEquals(msg, g.pathLength(new String("2"), new String("2")), 0);
+            checkPath(g,
+                    new String("2"), new String("2"), 
+                    0,
+                    g.getPath(new String("2"), new String("2")));
+        }
+
+        {
+            // find path from a vertex that does not exist in the graph to itself
+            // should not exist a path
+            String msg = "There is no path from vertex 4 to vertex 4 (4 is not in the graph)";
+            assertFalse(msg, g.contains(new String("4")));
+            assertFalse(msg, g.hasPath(new String("4"), new String("4")));
+            assertEquals(msg, g.pathLength(new String("4"), new String("4")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("4"), new String("4"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("4"), new String("4")));
+        }
+
+        {
+            // find path from a vertex that does exist in the graph to one that does not exist in the graph
+            // should not exist a path
+
+            String msg = "There is no path from vertex 1 to vertex 4 (4 is not in the graph)";
+            assertFalse(msg, g.contains(new String("4")));
+            assertFalse(msg, g.hasPath(new String("1"), new String("4")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("4")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("1"), new String("4"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("1"), new String("4")));
+        }
+
+        {
+            // find path from a vertex that does not exist in the graph to on that does exist in the graph
+            // should not exist a path
+            String msg = "There is no path from vertex 4 to vertex 1 (4 is not in the graph)";
+            assertFalse(msg, g.hasPath(new String("4"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("4"), new String("1")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("4"), new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("4"), new String("1")));
+        }   
+
     }
 
 
