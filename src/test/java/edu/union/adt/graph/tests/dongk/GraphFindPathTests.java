@@ -1,5 +1,7 @@
 package edu.union.adt.graph.tests.dongk;
 
+import java.util.Iterator;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
@@ -49,24 +51,25 @@ public class GraphFindPathTests {
      * @param pathLength the expected length of such path in a graph
      * @param path the Iterable<V> object containing the vertices of the graph starting from vertex from 
      * and ending at vertex to
-     * @return true if the path is consistent with the expected values
      */
-    private <V> boolean checkPath(Graph<V> g, V from, V to, int pathLength, Iterable<V> path){
+    private <V> void checkPath(Graph<V> g, V from, V to, int pathLength, Iterable<V> path){
         Iterator<V> pathIterator = path.iterator();
         if(pathLength == Integer.MAX_VALUE){
-            if(pathIterator.hasNext()) return false;
-            return true;
+            assertFalse("path should be empty", pathIterator.hasNext());
+        } else {
+            V curVert = pathIterator.next();
+            assertEquals("starting vertex is not correct", curVert, from);
+            int length = 0;
+            while(pathIterator.hasNext()){
+                V nextVert = pathIterator.next();
+                assertTrue(String.format("Edge %s %s does not exist", curVert, nextVert), g.hasEdge(curVert, nextVert));
+                curVert = nextVert;
+                ++length;
+            }
+            assertEquals("path leng is not consistent", length, pathLength);
+            assertTrue("final vertex is not to", curVert.equals(to));
         }
-        V curVert = pathIterator.next();
-        if(!curVert.equals(from)) return false;
-        int length = 0;
-        while(pathIterator.hasNext()){
-            V nextVert = pathIterator.next();
-            if(!g.hasEdge(curVert, nextVert)) return false;
-            curVert = nextVert;
-            ++length;
-        }
-        return length == pathLength && curVert.equals(to);
     }
+
 
 }
