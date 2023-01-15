@@ -37,7 +37,7 @@ public class GraphRemoveVertexAndEdgeTests {
     public void removeIsolatedVertex(){
         g.removeVertex(new String("6"));
 
-        assertEquals("Number of vertex reduces by 1", g.numVertices(), 5);
+        assertEquals("Number of vertex reduces by 1", 5, g.numVertices());
 
         assertTrue("Graph should still contains vertex 1", g.contains(new String("1")));
         assertTrue("Graph should still contains vertex 2", g.contains(new String("2")));
@@ -74,8 +74,8 @@ public class GraphRemoveVertexAndEdgeTests {
         assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
         assertFalse("Graph no longer contain edge 5 1", g.hasEdge(new String("5"), new String("1")));
 
-        assertEquals("Number of vertex reduces by 1", g.numVertices(), 5);
-        assertEquals("Number of vertices reduces by 5", g.numEdges(), 2);
+        assertEquals("Number of vertex reduces by 1", 5, g.numVertices());
+        assertEquals("Number of vertices reduces by 5", 2, g.numEdges());
     }
 
     @Test
@@ -101,8 +101,8 @@ public class GraphRemoveVertexAndEdgeTests {
 
             assertFalse("Graph never contains edge 1 6", g.hasEdge(new String("1"), new String("6")));
 
-            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
-            assertEquals("Number of edges stay the same", g.numEdges(), 7);
+            assertEquals("Number of vertex stays the same", 6, g.numVertices());
+            assertEquals("Number of edges stay the same", 7, g.numEdges());
             assertFalse("Graph should not be empty", g.isEmpty());
         }
 
@@ -127,8 +127,8 @@ public class GraphRemoveVertexAndEdgeTests {
             assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
             assertTrue("Graph should still contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
 
-            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
-            assertEquals("Number of edges stay the same", g.numEdges(), 7);
+            assertEquals("Number of vertex stays the same", 6, g.numVertices());
+            assertEquals("Number of edges stay the same", 7, g.numEdges());
             assertFalse("Graph should not be empty", g.isEmpty());
         }
 
@@ -150,8 +150,8 @@ public class GraphRemoveVertexAndEdgeTests {
             assertTrue("Graph should still contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
             assertTrue("Graph should still contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
 
-            assertEquals("Number of vertex stays the same", g.numVertices(), 6);
-            assertEquals("Number of edges reduces by 1", g.numEdges(), 6);
+            assertEquals("Number of vertex stays the same", 6, g.numVertices());
+            assertEquals("Number of edges reduces by 1", 6, g.numEdges());
             assertFalse("Graph should not be empty", g.isEmpty());
         }
 
@@ -178,8 +178,8 @@ public class GraphRemoveVertexAndEdgeTests {
             assertFalse("Graph no longer contains edge 2 5", g.hasEdge(new String("2"), new String("5")));
             assertFalse("Graph no longer contains edge 5 1", g.hasEdge(new String("5"), new String("1")));
 
-            assertEquals("Number of vertex is 0", g.numVertices(), 0);
-            assertEquals("Number of edges is 0", g.numEdges(), 0);
+            assertEquals("Number of vertex is 0", 0, g.numVertices());
+            assertEquals("Number of edges is 0", 0, g.numEdges());
             assertTrue("Graph should be empty", g.isEmpty());
         }
 
