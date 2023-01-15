@@ -134,6 +134,104 @@ public class GraphFindPathTests {
         }
     }
 
+    @Test
+    public void complexGraph(){
+        g.addEdge(new String("2"), new String("1"));
+        g.addEdge(new String("2"), new String("3"));
+        g.addEdge(new String("3"), new String("7"));
+        g.addEdge(new String("7"), new String("2"));
+        g.addEdge(new String("4"), new String("5"));
+        g.addEdge(new String("1"), new String("5"));
+        g.addEdge(new String("5"), new String("4"));
+        g.addEdge(new String("6"), new String("7"));
+        g.addEdge(new String("2"), new String("7"));
+        g.addEdge(new String("4"), new String("1"));
+        g.addEdge(new String("1"), new String("4"));
+        g.addEdge(new String("5"), new String("1"));
+        g.addEdge(new String("4"), new String("6"));
+        g.addEdge(new String("1"), new String("8"));
+        g.addEdge(new String("8"), new String("3"));
+        g.addEdge(new String("3"), new String("8"));
+        g.addEdge(new String("7"), new String("3"));
+        g.addEdge(new String("6"), new String("5"));
+        g.addEdge(new String("2"), new String("6"));
+        g.addEdge(new String("9"), new String("8"));
+        g.addEdge(new String("9"), new String("2"));
+        
+
+        {
+            String msg = "There is a path of length 4 from vertex 1 to vertex 2";
+            assertTrue(msg, g.hasPath(new String("1"), new String("2")));
+            assertEquals(msg, g.pathLength(new String("1"), new String("2")), 4);
+            checkPath(g,
+                    new String("1"), new String("2"), 
+                    4,
+                    g.getPath(new String("1"), new String("2")));
+        }
+
+        {
+            String msg = "There is a path of length 1 from vertex 2 to vertex 1";
+            assertTrue(msg, g.hasPath(new String("2"), new String("1")));
+            assertEquals(msg, g.pathLength(new String("2"), new String("1")), 1);
+            checkPath(g,
+                    new String("2"), new String("1"), 
+                    1,
+                    g.getPath(new String("2"), new String("1")));
+        }
+
+        {
+            String msg = "There is a path of length 2 from vertex 5 to vertex 6";
+            assertTrue(msg, g.hasPath(new String("5"), new String("6")));
+            assertEquals(msg, g.pathLength(new String("5"), new String("6")), 2);
+            checkPath(g,
+                    new String("5"), new String("6"), 
+                    2,
+                    g.getPath(new String("5"), new String("6")));
+        }
+
+        {
+            String msg = "There is a path of length 1 from vertex 6 to vertex 5";
+            assertTrue(msg, g.hasPath(new String("6"), new String("5")));
+            assertEquals(msg, g.pathLength(new String("6"), new String("5")), 1);
+            checkPath(g,
+                    new String("6"), new String("5"), 
+                    1,
+                    g.getPath(new String("6"), new String("5")));
+        }
+
+
+        {
+            String msg = "There is a path of length 1 from vertex 6 to vertex 5";
+            assertTrue(msg, g.hasPath(new String("6"), new String("5")));
+            assertEquals(msg, g.pathLength(new String("6"), new String("5")), 1);
+            checkPath(g,
+                    new String("6"), new String("5"), 
+                    1,
+                    g.getPath(new String("6"), new String("5")));
+        }
+
+        {
+            String msg = "There is a path of length 2 from vertex 9 to vertex 6";
+            assertTrue(msg, g.hasPath(new String("9"), new String("6")));
+            assertEquals(msg, g.pathLength(new String("9"), new String("6")), 2);
+            checkPath(g,
+                    new String("9"), new String("6"), 
+                    2,
+                    g.getPath(new String("9"), new String("6")));
+        }
+
+        {
+            String msg = "There is no path from vertex 6 to vertex 9";
+            assertFalse(msg, g.hasPath(new String("6"), new String("9")));
+            assertEquals(msg, g.pathLength(new String("6"), new String("9")), Integer.MAX_VALUE);
+            checkPath(g,
+                    new String("6"), new String("9"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("6"), new String("9")));
+        }
+
+    }
+
     /**
      * helper function to verify a path in a graph
      * can pass pathLength = Integer.MAX_VALUE into the function to signify that there does not exist such path
