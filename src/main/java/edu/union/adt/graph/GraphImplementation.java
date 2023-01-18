@@ -228,7 +228,7 @@ public class GraphImplementation<V> implements Graph<V>
      * no vertices and no edges.
      */
     public boolean isEmpty(){
-        return true;
+        return this.adjVerts.isEmpty();
     }
 
     /**
