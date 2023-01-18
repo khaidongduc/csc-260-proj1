@@ -247,7 +247,14 @@ public class GraphImplementation<V> implements Graph<V>
      * @param toRemove the vertex to remove.
      */
     public void removeVertex(V toRemove){
-
+        if(this.contains(toRemove)){
+            // remove all edges to and from vertex toRemove;
+            for(V vertex : this.getVertices()){
+                this.removeEdge(vertex, toRemove);
+                this.removeEdge(toRemove, vertex);
+            }
+            this.adjVerts.remove(toRemove);
+        }
     }
 
     /**
@@ -257,7 +264,9 @@ public class GraphImplementation<V> implements Graph<V>
      * to) was an edge in the graph, then numEdges = numEdges' - 1
      */
     public void removeEdge(V from, V to){
-
+        if(this.hasEdge(from, to)){
+            this.adjVerts.get(from).remove(to);
+        }
     }
 
     /**
