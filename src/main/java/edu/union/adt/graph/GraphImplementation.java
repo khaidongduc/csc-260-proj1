@@ -316,7 +316,14 @@ public class GraphImplementation<V> implements Graph<V>
      * the graph.  If there is no path, returns Integer.MAX_VALUE
      */
     public int pathLength(V from, V to){
-        return 0;
+        if(this.contains(from) && this.contains(to)){
+            Map<V, Integer> distance = new HashMap<V, Integer>();
+            Set<V> visited = breadthFirstSearch(from, to, distance, null);
+            if(visited.contains(to)){
+                return distance.get(to);
+            }
+        }
+        return Integer.MAX_VALUE;
     }
 
     /**
