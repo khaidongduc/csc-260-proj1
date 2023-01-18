@@ -5,6 +5,10 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Deque;
+
 import edu.union.adt.graph.Graph;
 
 /**
@@ -330,6 +334,49 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public Iterable<V> getPath(V from, V to){
         return new HashSet<>();
+    }
+
+    /**
+     * a helper method to excecute breadthFirstSearch on this graph
+     * 
+     * @param source the source vertex of breadthFirstSearch, the source vertex needs to be within the graph
+     * @param target the target vertex, if there is no target, pass null. the BFS will stop upon the target vertex is found
+     * specifying a target, in most case, produce only partial answer to breathFirstSearch which includes the right answer to target
+     * @param distance the map of vertex to the distance between the source vertex and the vertex passed in as a key
+     * @param prevVertex the map of vertex to the previous vertex in the path from the source vertex and the vertex passed in as a key.
+     * if the key vertex is the source vertex, the value of prevVertex.get(key) == null
+     */
+    private Set<V> breadthFirstSearch(V source, V target, Map<V, Integer> distance, Map<V, V> prevVertex){
+        assert distance == null || (distance != null && distance.isEmpty());
+        assert prevVertex == null || (prevVertex != null && prevVertex.isEmpty());
+        assert this.contains(source);
+        assert target == null || this.contains(target);
+
+        Set<V> visited = new HashSet<V>();
+        Queue<V> vertexQueue = new LinkedList();
+        vertexQueue.add(source);
+        visited.add(source);
+        if(distance != null)
+            distance.put(source, 0);
+        if(prevVertex != null)
+            prevVertex.put(source, null);
+
+        while(!vertexQueue.isEmpty()){
+            V vert = vertexQueue.poll();
+            for(V adjVert : this.adjacentTo(vert)){
+                if(!visited.contains(adjVert)){
+                    visited.add(adjVert);
+                    vertexQueue.add(adjVert);
+                    if(distance != null)
+                        distance.put(adjVert, distance.get(vert) + 1);
+                    if(prevVertex != null)
+                        prevVertex.put(adjVert, vert);
+                    if(vert.equals(target)) return visited; // if target is found, no longer need to search
+                }
+            }
+        }
+
+        return visited;
     }
 
 }
