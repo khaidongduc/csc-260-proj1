@@ -292,7 +292,11 @@ public class GraphImplementation<V> implements Graph<V>
      * @return true iff there is a path from 'from' to 'to' in the graph.
      */
     public boolean hasPath(V from, V to){
-        return true;
+        if(this.contains(from) && this.contains(to)){
+            Set<V> visited = breadthFirstSearch(from, to, null, null);
+            return visited.contains(to);
+        }
+        return false;
     }
 
     /**
