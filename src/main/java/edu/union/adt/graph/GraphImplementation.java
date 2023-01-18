@@ -344,7 +344,19 @@ public class GraphImplementation<V> implements Graph<V>
      * source and destination vertices.
      */
     public Iterable<V> getPath(V from, V to){
-        return new HashSet<>();
+        Deque<V> path = new LinkedList();
+        if(this.contains(from) && this.contains(to)){
+            Map<V, V> prevVertex = new HashMap<V, V>();
+            Set<V> visited = breadthFirstSearch(from, to, null, prevVertex);
+            if(visited.contains(to)){
+                V curVert = to;
+                while(curVert != null){
+                    path.addFirst(curVert);
+                    curVert = prevVertex.get(curVert);
+                }
+            }
+        }
+        return path;
     }
 
     /**
