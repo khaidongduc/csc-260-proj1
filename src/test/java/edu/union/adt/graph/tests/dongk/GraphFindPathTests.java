@@ -104,6 +104,53 @@ public class GraphFindPathTests {
                     g.getPath(new String("4"), new String("1")));
         }   
 
+        {
+            // find path from null vertex to itself
+            // should not exist a path
+            String msg = "There is no path from vertex null to vertex null (null is ignored)";
+            assertFalse(msg, g.contains(null));
+            assertFalse(msg, g.hasPath(null, null));
+            assertEquals(msg, Integer.MAX_VALUE, g.pathLength(null, null));
+            checkPath(g,
+                    null, null,
+                    Integer.MAX_VALUE,
+                    g.getPath(null, null));
+        }
+
+        {
+            // find path from null vertex to one that does not exist in the graph
+            // should not exist a path
+
+            String msg = "There is no path from vertex null to vertex 4 (null is ignored)";
+            assertFalse(msg, g.contains(new String("4")));
+            assertFalse(msg, g.contains(null));
+            assertFalse(msg, g.hasPath(null, new String("4")));
+            assertEquals(msg, Integer.MAX_VALUE, g.pathLength(null, new String("4")));
+            checkPath(g,
+                    null, new String("4"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(null, new String("4")));
+        }
+
+        {
+            // find path from a null vertex to one that does exist in the graph and vice versa
+            // should not exist a path either way
+            String msg = "There is no path from vertex null to vertex 1 or vice versa (null is ignored)";
+            assertFalse(msg, g.hasPath(null, new String("1")));
+            assertEquals(msg, Integer.MAX_VALUE, g.pathLength(null, new String("1")));
+            checkPath(g,
+                    null, new String("1"), 
+                    Integer.MAX_VALUE,
+                    g.getPath(null, new String("1")));
+
+            assertFalse(msg, g.hasPath(new String("1"), null));
+            assertEquals(msg, Integer.MAX_VALUE, g.pathLength(new String("1"), null));
+            checkPath(g,
+                    new String("1"), null, 
+                    Integer.MAX_VALUE,
+                    g.getPath(new String("1"), null));
+        }
+
     }
 
     @Test
