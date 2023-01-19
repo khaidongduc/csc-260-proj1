@@ -87,11 +87,14 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public void addEdge(V from, V to)
     {
-        this.addVertex(from);
-        this.addVertex(to);
-        adjVerts.get(from).add(to);
+        if(from != null && to != null)
+        {
+            this.addVertex(from);
+            this.addVertex(to);
+            adjVerts.get(from).add(to);
+        }
     }
-
+    
     /**
      * Adds a vertex to the graph.  If the vertex already exists in
      * the graph, does nothing.  If the vertex does not exist, it is
@@ -101,7 +104,7 @@ public class GraphImplementation<V> implements Graph<V>
      */
     public void addVertex(V vertex)
     {
-        if(!adjVerts.containsKey(vertex)){
+        if(vertex != null && !adjVerts.containsKey(vertex)){
             adjVerts.put(vertex, new HashSet<V>());
         }
     }
