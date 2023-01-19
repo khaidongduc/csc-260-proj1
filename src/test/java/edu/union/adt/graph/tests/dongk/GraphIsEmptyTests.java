@@ -33,6 +33,21 @@ public class GraphIsEmptyTests {
         }
         
         {
+            g.addVertex(null);
+            assertTrue("the graph should be empty after trying adding null vertex", g.isEmpty());
+
+            g.addEdge(null, null);
+            assertTrue("the graph should be empty after trying adding null edge", g.isEmpty());
+
+            
+            g.addEdge("1", null);
+            assertTrue("the graph should be empty after trying adding null edge", g.isEmpty());
+
+            g.addEdge(null, "2");
+            assertTrue("the graph should be empty after trying adding null edge", g.isEmpty());
+        }
+
+        {
             g.addVertex(new String("01"));
             g.addVertex(new String("02"));
             g.addEdge(new String("01"), new String("02"));
