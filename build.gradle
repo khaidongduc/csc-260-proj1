@@ -6,6 +6,7 @@ test {
   useJUnit()
 
   include '**/*Suite.class'
+  include '**/*Tests.class'
 }
 
 dependencies {
