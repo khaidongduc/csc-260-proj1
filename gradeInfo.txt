@@ -1,0 +1,12 @@
+Khai (dongk)
+
+Git Usage and Project Structure (20/20)
+---------------------------------------
+
+Good.
+
+Code and Test Quality (50/50)
+-----------------------------
+
+Failures found IN your code  : 6
+Failures found BY your tests : 83
